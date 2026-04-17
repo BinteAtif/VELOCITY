@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VELOCITY • Future of Driving</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .heading-font {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .hero-bg {
+      background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), 
+                        url('https://www.goo-net-exchange.com/common/img/top_swiper/img/pc/bg_pc_mv05.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .nav-link {
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background: linear-gradient(to right, #ef4444, #f97316);
+      transition: width 0.4s ease;
+    }
+    .nav-link:hover:after, .nav-link.active:after {
+      width: 100%;
+    }
+
+    .car-card {
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+    .car-card:hover {
+      transform: translateY(-20px) scale(1.02);
+      box-shadow: 0 40px 80px -20px rgba(239, 68, 68, 0.4);
+    }
+
+    .car-tab {
+      animation: modalPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.95) translateY(60px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .gallery-img {
+      transition: all 0.4s ease;
+    }
+    .gallery-img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 15px 30px rgba(239, 68, 68, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white overflow-x-hidden">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-2xl z-50 border-b border-zinc-800">
+    <div class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-red-600 via-red-500 to-orange-600 rounded-3xl flex items-center justify-center text-3xl font-black shadow-2xl"><img src="data:image/png;base64,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"></div>
+        <h1 class="text-4xl font-bold tracking-tighter heading-font">VELOCITY</h1>
+      </div>
+
+      <div class="hidden md:flex items-center gap-12 text-lg font-medium">
+        <a href="#home" onclick="setActive(this)" class="nav-link active">Home</a>
+        <a href="#cars" onclick="setActive(this)" class="nav-link">Cars</a>
+        <a href="#about" onclick="setActive(this)" class="nav-link">About</a>
+        <a href="#contact" onclick="setActive(this)" class="nav-link">Contact</a>
+      </div>
+
+      <button onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })" 
+              class="px-10 py-4 bg-white text-black font-semibold rounded-3xl hover:bg-red-600 hover:text-white transition-all shadow-xl">
+        Book Test Drive
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero-bg h-screen flex items-center relative">
+    <div class="max-w-6xl mx-auto px-8 text-center">
+      <h2 class="text-7xl md:text-[6rem] font-bold heading-font leading-none mb-6 tracking-tighter">
+        THE FUTURE<br>IS HERE
+      </h2>
+      <p class="text-3xl text-zinc-300 max-w-3xl mx-auto mb-12">
+        30 masterpieces of engineering, design &amp; performance
+      </p>
+      <a href="#cars" class="inline-flex items-center gap-4 px-16 py-6 bg-red-600 hover:bg-red-700 text-2xl font-semibold rounded-3xl transition-all shadow-2xl">
+        Discover the Cars
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Cars Section -->
+  <section id="cars" class="py-28 bg-zinc-900">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="text-center mb-20">
+        <h2 class="text-6xl font-bold heading-font">Our 30 Masterpieces</h2>
+        <p class="text-zinc-400 mt-4 text-xl">Each with its own identity and stunning gallery</p>
+      </div>
+
+      <div id="carsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-28 bg-black">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid lg:grid-cols-2 gap-20 items-center">
+        <div>
+          <h2 class="text-6xl font-bold heading-font mb-10">Redefining Automotive Excellence</h2>
+          <div class="space-y-8 text-lg text-zinc-300">
+            <p>Founded in Karachi in 2018, Velocity Motors fuses global innovation with local passion to create vehicles that transcend ordinary driving.</p>
+            <p>From hyper-electric supercars to commanding luxury SUVs — every model is crafted with precision and soul.</p>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden shadow-2xl">
+          <img src="https://mir-s3-cdn-cf.behance.net/projects/404/2edbe9228040831.Y3JvcCwxNTQwLDEyMDUsMjI4LDA.jpg" class="w-full" alt="Velocity Interior">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-28 bg-zinc-900">
+    <div class="max-w-6xl mx-auto px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-6xl font-bold heading-font">Begin Your Journey</h2>
+        <p class="text-zinc-400 text-2xl mt-4">Let us help you find your perfect Velocity</p>
+      </div>
+
+      <div class="grid lg:grid-cols-5 gap-12">
+        <div class="lg:col-span-3 bg-zinc-900/80 backdrop-blur-xl border border-zinc-700 rounded-3xl p-12">
+          <form id="contactForm" class="space-y-8">
+            <div class="grid md:grid-cols-2 gap-6">
+              <input type="text" id="fname" placeholder="First Name" class="bg-zinc-950 border border-zinc-700 rounded-2xl px-7 py-5 focus:border-red-600 outline-none transition-all">
+              <input type="text" id="lname" placeholder="Last Name" class="bg-zinc-950 border border-zinc-700 rounded-2xl px-7 py-5 focus:border-red-600 outline-none transition-all">
+            </div>
+            <input type="email" id="email" placeholder="Email Address" class="w-full bg-zinc-950 border border-zinc-700 rounded-2xl px-7 py-5 focus:border-red-600 outline-none transition-all">
+            <input type="tel" id="phone" placeholder="Phone Number" class="w-full bg-zinc-950 border border-zinc-700 rounded-2xl px-7 py-5 focus:border-red-600 outline-none transition-all">
+
+            <select id="modelSelect" class="w-full bg-zinc-950 border border-zinc-700 rounded-2xl px-7 py-5 focus:border-red-600 outline-none transition-all">
+              <option value="">Interested Model (Optional)</option>
+            </select>
+
+            <textarea id="message" rows="6" placeholder="Tell us what excites you..." class="w-full bg-zinc-950 border border-zinc-700 rounded-2xl px-7 py-5 focus:border-red-600 outline-none transition-all"></textarea>
+
+            <button type="button" onclick="submitForm()" 
+                    class="w-full py-7 bg-gradient-to-r from-red-600 to-orange-600 text-xl font-semibold rounded-3xl hover:scale-[1.02] transition-all shadow-xl">
+              Send Inquiry
+            </button>
+          </form>
+        </div>
+
+        <div class="lg:col-span-2 space-y-12 text-zinc-400">
+          <div>
+            <h3 class="text-3xl font-semibold text-white mb-6">Our Showroom</h3>
+            <p>Plot 45, Shahrah-e-Faisal<br>Karachi, Sindh, Pakistan</p>
+            <p class="mt-6">10:00 AM – 8:00 PM • Daily</p>
+          </div>
+          <div>
+            <h3 class="text-3xl font-semibold text-white mb-6">Get In Touch</h3>
+            <p class="flex items-center gap-4 mb-4"><i class="fa-solid fa-phone w-6"></i> +92 300 1234567</p>
+            <p class="flex items-center gap-4"><i class="fa-solid fa-envelope w-6"></i> info@velocitymotors.pk</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Car Detail Tab -->
+  <div id="carTab" class="hidden fixed inset-0 bg-black/95 z-[100] overflow-auto">
+    <div class="max-w-7xl mx-auto p-8">
+      <div class="flex justify-end mb-8 sticky top-4 z-10">
+        <button onclick="closeCarTab()" class="text-5xl text-zinc-400 hover:text-red-600 transition-all">✕</button>
+      </div>
+
+      <div id="carContent" class="car-tab"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-black py-20 border-t border-zinc-800">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <div class="flex justify-center items-center gap-4 mb-8">
+        <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-orange-600 rounded-3xl flex items-center justify-center text-3xl font-black"><img src="data:image/png;base64,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"></div>
+        <h1 class="text-4xl font-bold tracking-tighter heading-font"></div>
+        <h1 class="text-4xl font-bold tracking-tighter heading-font">VELOCITY</h1>
+      </div>
+      <p class="text-zinc-500">© 2026 Velocity Motors • Karachi, Pakistan</p>
+    </div>
+  </footer>
+
+  <script>
+    const carsData = [
+      {id:0, title:"JAGUAR E-PACE S 200PS", price:"$23,873", type:"Performance", 
+       mainImg:"https://picture1.goo-net.com/7009800349/30260408/J/70098003493026040800100.jpg",
+       gallery:["https://picture1.goo-net.com/980/9800349/J/9800349A30260408W00102.jpg","https://picture1.goo-net.com/980/9800349/J/9800349A30260408W00106.jpg","https://picture1.goo-net.com/980/9800349/J/9800349A30260408W00107.jpg","https://picture1.goo-net.com/980/9800349/J/9800349A30260408W00103.jpg", "https://picture1.goo-net.com/980/9800349/J/9800349A30260408W00115.jpg", "https://picture1.goo-net.com/980/9800349/J/9800349A30260408W00117.jpg", "https://picture1.goo-net.com/980/9800349/J/9800349A30260408W00123.jpg", "https://picture1.goo-net.com/980/9800349/J/9800349A30260408W00130.jpg", "https://picture1.goo-net.com/980/9800349/J/9800349A30260408W00110.jpg", "https://picture1.goo-net.com/980/9800349/J/9800349A30260408W00112.jpg", "https://picture1.goo-net.com/980/9800349/J/9800349A30260408W00113.jpg"]},
+      {id:1, title:"NISSAN GT-R BLACK EDITION", price:"$92,658", type:"Performance", 
+       mainImg:"https://picture1.goo-net.com/7000208803/30240603/J/70002088033024060300100.jpg",
+       gallery:["https://picture1.goo-net.com/020/0208803/J/0208803A30240603W00111.jpg","https://picture1.goo-net.com/020/0208803/J/0208803A30240603W00107.jpg","https://picture1.goo-net.com/020/0208803/J/0208803A30240603W00105.jpg","https://picture1.goo-net.com/020/0208803/J/0208803A30240603W00109.jpg","https://picture1.goo-net.com/020/0208803/J/0208803A30240603W00135.jpg","https://picture1.goo-net.com/020/0208803/J/0208803A30240603W00140.jpg","https://picture1.goo-net.com/020/0208803/J/0208803A30240603W00143.jpg","https://picture1.goo-net.com/020/0208803/J/0208803A30240603W00127.jpg","https://picture1.goo-net.com/020/0208803/J/0208803A30240603W00115.jpg","https://picture1.goo-net.com/020/0208803/J/0208803A30240603W00112.jpg","https://picture1.goo-net.com/020/0208803/J/0208803A30240603W00120.jpg",]},
+      {id:2, title:"LEXUS ES ES300H F SPORT", price:"$29,395", type:"Luxary", 
+       mainImg:"https://picture1.goo-net.com/9880251123/00804910/J/98802511230080491000300.jpg",
+       gallery:["https://picture1.goo-net.com/080/0804910/J/0804910A20251122D00327.jpg","https://picture1.goo-net.com/080/0804910/J/0804910A20251122D00326.jpg","https://picture1.goo-net.com/080/0804910/J/0804910A20251122D00324.jpg","https://picture1.goo-net.com/080/0804910/J/0804910A20251122D00325.jpg","https://picture1.goo-net.com/080/0804910/J/0804910A20251122D00304.jpg","https://picture1.goo-net.com/080/0804910/J/0804910A20251122D00305.jpg","https://picture1.go.o-netcom/080/0804910/J/0804910A20251122D00312.jpg","https://picture1.goo-net.com/080/0804910/J/0804910A20251122D00349.jpg","https://picture1.goo-net.com/080/0804910/J/0804910A20251122D00329.jpg","https://picture1.goo-net.com/080/0804910/J/0804910A20251122D00328.jpg","https://picture1.goo-net.com/080/0804910/J/0804910A20251122D00368.jpg",]},
+      {id:3, title:"LAMBORGHINI HURACAN", price:"$249,430", type:"Luxury", 
+       mainImg:"https://picture1.goo-net.com/7000520259/30250328/J/70005202593025032800100.jpg",
+       gallery:["https://picture1.goo-net.com/052/0520259/J/0520259A30250328W00101.jpg","https://picture1.goo-net.com/052/0520259/J/0520259A30250328W00119.jpg","https://picture1.goo-net.com/052/0520259/J/0520259A30250328W00131.jpg","https://picture1.goo-net.com/052/0520259/J/0520259A30250328W00118.jpg","https://picture1.goo-net.com/052/0520259/J/0520259A30250328W00133.jpg","https://picture1.goo-net.com/052/0520259/J/0520259A30250328W00136.jpg","https://picture1.goo-net.com/052/0520259/J/0520259A30250328W00129.jpg","https://picture1.goo-net.com/052/0520259/J/0520259A30250328W00147.jpg","https://picture1.goo-net.com/052/0520259/J/0520259A30250328W00123.jpg","https://picture1.goo-net.com/052/0520259/J/0520259A30250328W00112.jpg","https://picture1.goo-net.com/052/0520259/J/0520259A30250328W00159.jpg",]},
+      {id:4, title:"HONDA S2000 TYPE S", price:"$33,815", type:"Performance", 
+       mainImg:"https://picture1.goo-net.com/7000207131/30250923/J/70002071313025092300100.jpg",
+       gallery:["https://picture1.goo-net.com/020/0207131/J/0207131A30250923W00124.jpg","https://picture1.goo-net.com/020/0207131/J/0207131A30250923W00151.jpg","https://picture1.goo-net.com/020/0207131/J/0207131A30250923W00149.jpg","https://picture1.goo-net.com/020/0207131/J/0207131A30250923W00145.jpg","https://picture1.goo-net.com/020/0207131/J/0207131A30250923W00141.jpg","https://picture1.goo-net.com/020/0207131/J/0207131A30250923W00142.jpg","https://picture1.goo-net.com/020/0207131/J/0207131A30250923W00135.jpg","https://picture1.goo-net.com/020/0207131/J/0207131A30250923W00114.jpg","https://picture1.goo-net.com/020/0207131/J/0207131A30250923W00125.jpg","https://picture1.goo-net.com/020/0207131/J/0207131A30250923W00131.jpg"]},
+      {id:5, title:"LOTUS ELETRE R", price:"$126,594", type:"Electric", 
+       mainImg:"https://picture1.goo-net.com/7009540044/30251003/J/70095400443025100300100.jpg",
+       gallery:["https://picture1.goo-net.com/954/9540044/J/9540044A30251003W00102.jpg","https://picture1.goo-net.com/954/9540044/J/9540044A30251003W00104.jpg","https://picture1.goo-net.com/954/9540044/J/9540044A30251003W00123.jpg","https://picture1.goo-net.com/954/9540044/J/9540044A30251003W00134.jpg","https://picture1.goo-net.com/954/9540044/J/9540044A30251003W00110.jpg","https://picture1.goo-net.com/954/9540044/J/9540044A30251003W00118.jpg","https://picture1.goo-net.com/954/9540044/J/9540044A30251003W00120.jpg","https://picture1.goo-net.com/954/9540044/J/9540044A30251003W00112.jpg","https://picture1.goo-net.com/954/9540044/J/9540044A30251003W00119.jpg","https://picture1.goo-net.com/954/9540044/J/9540044A30251003W00143.jpg","https://picture1.goo-net.com/954/9540044/J/9540044A30251003W00108.jpg",]},
+      {id:6, title:"TOYOTA KLUGER V FOUR AERO KLUGER", price:"$9,435", type:"Luxury", 
+       mainImg:"https://picture1.goo-net.com/7001200556/30260323/J/70012005563026032300100.jpg",
+       gallery:["https://picture1.goo-net.com/120/1200556/J/1200556A30260323W00109.jpg","https://picture1.goo-net.com/120/1200556/J/1200556A30260323W00122.jpg","https://picture1.goo-net.com/120/1200556/J/1200556A30260323W00110.jpg","https://picture1.goo-net.com/120/1200556/J/1200556A30260323W00112.jpg","https://picture1.goo-net.com/120/1200556/J/1200556A30260323W00132.jpg","https://picture1.goo-net.com/120/1200556/J/1200556A30260323W00138.jpg","https://picture1.goo-net.com/120/1200556/J/1200556A30260323W00131.jpg","https://picture1.goo-net.com/120/1200556/J/1200556A30260323W00157.jpg","https://picture1.goo-net.com/120/1200556/J/1200556A30260323W00126.jpg","https://picture1.goo-net.com/120/1200556/J/1200556A30260323W00106.jpg","https://picture1.goo-net.com/120/1200556/J/1200556A30260323W00116.jpg",]},
+      {id:7, title:"MAZDA SAVANNA RX-7 GT-X", price:"$25,204", type:"Performance", 
+       mainImg:"https://picture1.goo-net.com/7000209208/30260401/J/70002092083026040100100.jpg",
+       gallery:["https://picture1.goo-net.com/020/0209208/J/0209208A30260401W00117.jpg","https://picture1.goo-net.com/020/0209208/J/0209208A30260401W00120.jpg","https://picture1.goo-net.com/020/0209208/J/0209208A30260401W00119.jpg","https://picture1.goo-net.com/020/0209208/J/0209208A30260401W00118.jpg","https://picture1.goo-net.com/020/0209208/J/0209208A30260401W00171.jpg","https://picture1.goo-net.com/020/0209208/J/0209208A30260401W00127.jpg","https://picture1.goo-net.com/020/0209208/J/0209208A30260401W00149.jpg","https://picture1.goo-net.com/020/0209208/J/0209208A30260401W00109.jpg","https://picture1.goo-net.com/020/0209208/J/0209208A30260401W00144.jpg","https://picture1.goo-net.com/020/0209208/J/0209208A30260401W00167.jpg",]},
+      {id:8, title:"TESLA MODEL X 100D", price:"$31,820", type:"SUV", 
+       mainImg:"https://picture1.goo-net.com/7009540159/30260130/J/70095401593026013000300.jpg",
+       gallery:["https://picture1.goo-net.com/954/9540159/J/9540159A30260130W00323.jpg","https://picture1.goo-net.com/954/9540159/J/9540159A30260130W00304.jpg","https://picture1.goo-net.com/954/9540159/J/9540159A30260130W00332.jpg","https://picture1.goo-net.com/954/9540159/J/9540159A30260130W00304.jpg","https://picture1.goo-net.com/954/9540159/J/9540159A30260130W00343.jpg","https://picture1.goo-net.com/954/9540159/J/9540159A30260130W00346.jpg","https://picture1.goo-net.com/954/9540159/J/9540159A30260130W00347.jpg","https://picture1.goo-net.com/954/9540159/J/9540159A30260130W00348.jpg","https://picture1.goo-net.com/954/9540159/J/9540159A30260130W00335.jpg","https://picture1.goo-net.com/954/9540159/J/9540159A30260130W00305.jpg","https://picture1.goo-net.com/954/9540159/J/9540159A30260130W00315.jpg","https://picture1.goo-net.com/954/9540159/J/9540159A30260130W00359.jpg",]},
+      {id:9, title:"HYUNDAI HYUNDAI COUPE FX", price:"$5,158", type:"FX", 
+       mainImg:"https://picture1.goo-net.com/7000403257/30241114/J/70004032573024111400100.jpg",
+       gallery:["https://picture1.goo-net.com/040/0403257/J/0403257A30241114W00109.jpg","https://picture1.goo-net.com/040/0403257/J/0403257A30241114W00113.jpg","https://picture1.goo-net.com/040/0403257/J/0403257A30241114W00115.jpg","https://picture1.goo-net.com/040/0403257/J/0403257A30241114W00111.jpg","https://picture1.goo-net.com/040/0403257/J/0403257A30241114W00103.jpg","https://picture1.goo-net.com/040/0403257/J/0403257A30241114W00104.jpg","https://picture1.goo-net.com/040/0403257/J/0403257A30241114W00102.jpg","https://picture1.goo-net.com/040/0403257/J/0403257A30241114W00108.jpg","https://picture1.goo-net.com/040/0403257/J/0403257A30241114W00110.jpg","https://picture1.goo-net.com/040/0403257/J/0403257A30241114W00114.jpg",]},
+      {id:10, title:"NISSAN GT-R PURE EDITION", price:"$166,660", type:"Sports", 
+       mainImg:"https://picture1.goo-net.com/7000207827/30250126/J/70002078273025012600200.jpg",
+       gallery:["https://picture1.goo-net.com/020/0207827/J/0207827A30250126W00211.jpg","https://picture1.goo-net.com/020/0207827/J/0207827A30250126W00207.jpg","https://picture1.goo-net.com/020/0207827/J/0207827A30250126W00205.jpg","https://picture1.goo-net.com/020/0207827/J/0207827A30250126W00209.jpg","https://picture1.goo-net.com/020/0207827/J/0207827A30250126W00217.jpg","https://picture1.goo-net.com/020/0207827/J/0207827A30250126W00218.jpg","https://picture1.goo-net.com/020/0207827/J/0207827A30250126W00227.jpg","https://picture1.goo-net.com/020/0207827/J/0207827A30250126W00231.jpg","https://picture1.goo-net.com/020/0207827/J/0207827A30250126W00230.jpg",]},
+      {id:11, title:"SUBARU IMPREZA WRX STI", price:"$16,173", type:"Performance", 
+       mainImg:"https://picture1.goo-net.com/7000301610/30260323/J/70003016103026032300200.jpg",
+       gallery:["https://picture1.goo-net.com/030/0301610/J/0301610A30260323W00211.jpg","https://picture1.goo-net.com/030/0301610/J/0301610A30260323W00205.jpg","https://picture1.goo-net.com/030/0301610/J/0301610A30260323W00203.jpg","https://picture1.goo-net.com/030/0301610/J/0301610A30260323W00204.jpg","https://picture1.goo-net.com/030/0301610/J/0301610A30260323W00232.jpg","https://picture1.goo-net.com/030/0301610/J/0301610A30260323W00222.jpg","https://picture1.goo-net.com/030/0301610/J/0301610A30260323W00220.jpg","https://picture1.goo-net.com/030/0301610/J/0301610A30260323W00229.jpg","https://picture1.goo-net.com/030/0301610/J/0301610A30260323W00219.jpg","https://picture1.goo-net.com/030/0301610/J/0301610A30260323W00210.jpg","https://picture1.goo-net.com/030/0301610/J/0301610A30260323W00208.jpg",]},
+      {id:12, title:"SUZUKI JIMNY SIERRA JC", price:"$20,641", type:"Luxuary", 
+       mainImg:"https://picture1.goo-net.com/7000302276/30260402/J/70003022763026040200100.jpg",
+       gallery:["https://picture1.goo-net.com/030/0302276/J/0302276A30260402W00113.jpg","https://picture1.goo-net.com/030/0302276/J/0302276A30260402W00115.jpg","https://picture1.goo-net.com/030/0302276/J/0302276A30260402W00148.jpg","https://picture1.goo-net.com/030/0302276/J/0302276A30260402W00151.jpg","https://picture1.goo-net.com/030/0302276/J/0302276A30260402W00146.jpg","https://picture1.goo-net.com/030/0302276/J/0302276A30260402W00145.jpg","https://picture1.goo-net.com/030/0302276/J/0302276A30260402W00158.jpg","https://picture1.goo-net.com/030/0302276/J/0302276A30260402W00102.jpg","https://picture1.goo-net.com/030/0302276/J/0302276A30260402W00119.jpg","https://picture1.goo-net.com/030/0302276/J/0302276A30260402W00135.jpg","https://picture1.goo-net.com/030/0302276/J/0302276A30260402W00116.jpg",]},
+      {id:13, title:"NISSAN SILVIA KS AERO SE", price:"$24,470", type:"Performance", 
+       mainImg:"https://picture1.goo-net.com/7000207184/30241101/J/70002071843024110100100.jpg",
+       gallery:["https://picture1.goo-net.com/020/0207184/J/0207184A30241101W00174.jpg","https://picture1.goo-net.com/020/0207184/J/0207184A30241101W00172.jpg","https://picture1.goo-net.com/020/0207184/J/0207184A30241101W00175.jpg","https://picture1.goo-net.com/020/0207184/J/0207184A30241101W00101.jpg","https://picture1.goo-net.com/020/0207184/J/0207184A30241101W00120.jpg","https://picture1.goo-net.com/020/0207184/J/0207184A30241101W00140.jpg","https://picture1.goo-net.com/020/0207184/J/0207184A30241101W00149.jpg","https://picture1.goo-net.com/020/0207184/J/0207184A30241101W00121.jpg","https://picture1.goo-net.com/020/0207184/J/0207184A30241101W00112.jpg","https://picture1.goo-net.com/020/0207184/J/0207184A30241101W00173.jpg","https://picture1.goo-net.com/020/0207184/J/0207184A30241101W00176.jpg",]},
+      {id:14, title:"PORSCHE 911 911GT3", price:"$241,128", type:"Performance", 
+       mainImg:"https://picture1.goo-net.com/7009572201/30260402/J/70095722013026040200100.jpg",
+       gallery:["https://picture1.goo-net.com/957/9572201/J/9572201A30260402W00105.jpg","https://picture1.goo-net.com/957/9572201/J/9572201A30260402W00109.jpg","https://picture1.goo-net.com/957/9572201/J/9572201A30260402W00107.jpg","https://picture1.goo-net.com/957/9572201/J/9572201A30260402W00110.jpg","https://picture1.goo-net.com/957/9572201/J/9572201A30260402W00125.jpg","https://picture1.goo-net.com/957/9572201/J/9572201A30260402W00126.jpg","https://picture1.goo-net.com/957/9572201/J/9572201A30260402W00121.jpg","https://picture1.goo-net.com/957/9572201/J/9572201A30260402W00114.jpg","https://picture1.goo-net.com/957/9572201/J/9572201A30260402W00106.jpg","https://picture1.goo-net.com/957/9572201/J/9572201A30260402W00111.jpg",]},
+      {id:15, title:"MERCEDES MAYBACH GLS GLS600 4MATIC FIRST CLASS PACKAGE", price:"$119,298", type:"SUV", 
+       mainImg:"https://picture1.goo-net.com/7009900133/30260328/J/70099001333026032800200.jpg",
+       gallery:["https://picture1.goo-net.com/990/9900133/J/9900133A30260328W00215.jpg","https://picture1.goo-net.com/990/9900133/J/9900133A30260328W00221.jpg","https://picture1.goo-net.com/990/9900133/J/9900133A30260328W00218.jpg","https://picture1.goo-net.com/990/9900133/J/9900133A30260328W00224.jpg","https://picture1.goo-net.com/990/9900133/J/9900133A30260328W00251.jpg","https://picture1.goo-net.com/990/9900133/J/9900133A30260328W00258.jpg","https://picture1.goo-net.com/990/9900133/J/9900133A30260328W00225.jpg","https://picture1.goo-net.com/990/9900133/J/9900133A30260328W00240.jpg","https://picture1.goo-net.com/990/9900133/J/9900133A30260328W00259.jpg","https://picture1.goo-net.com/990/9900133/J/9900133A30260328W00213.jpg","https://picture1.goo-net.com/990/9900133/J/9900133A30260328W00223.jpg",]},
+      {id:16, title:"BMW M3 M3 SEDAN COMPETITION M X DRIVE", price:"$73,642", type:"Performance", 
+       mainImg:"https://picture1.goo-net.com/7009700263/30260329/J/70097002633026032900100.jpg",
+       gallery:["https://picture1.goo-net.com/970/9700263/J/9700263A30260329W00104.jpg","https://picture1.goo-net.com/970/9700263/J/9700263A30260329W00108.jpg","https://picture1.goo-net.com/970/9700263/J/9700263A30260329W00106.jpg","https://picture1.goo-net.com/970/9700263/J/9700263A30260329W00110.jpg","https://picture1.goo-net.com/970/9700263/J/9700263A30260329W00117.jpg","https://picture1.goo-net.com/970/9700263/J/9700263A30260329W00120.jpg","https://picture1.goo-net.com/970/9700263/J/9700263A30260329W00161.jpg","https://picture1.goo-net.com/970/9700263/J/9700263A30260329W00125.jpg","https://picture1.goo-net.com/970/9700263/J/9700263A30260329W00111.jpg","https://picture1.goo-net.com/970/9700263/J/9700263A30260329W00171.jpg","https://picture1.goo-net.com/970/9700263/J/9700263A30260329W00173.jpg",]},
+      {id:17, title:"AUDI S5 SPORTBACK BASE GRADE", price:"$33,143", type:"Sports", 
+       mainImg:"https://picture1.goo-net.com/9880260207/00206771/J/98802602070020677100500.jpg",
+       gallery:["https://picture1.goo-net.com/020/0206771/J/0206771A20260206D00512.jpg","https://picture1.goo-net.com/020/0206771/J/0206771A20260206D00513.jpg","https://picture1.goo-net.com/020/0206771/J/0206771A20260206D00514.jpg","https://picture1.goo-net.com/020/0206771/J/0206771A20260206D00578.jpg","https://picture1.goo-net.com/020/0206771/J/0206771A20260206D00555.jpg","https://picture1.goo-net.com/020/0206771/J/0206771A20260206D00556.jpg","https://picture1.goo-net.com/020/0206771/J/0206771A20260206D00517.jpg","https://picture1.goo-net.com/020/0206771/J/0206771A20260206D00561.jpg","https://picture1.goo-net.com/020/0206771/J/0206771A20260206D00518.jpg","https://picture1.goo-net.com/020/0206771/J/0206771A20260206D00519.jpg","https://picture1.goo-net.com/020/0206771/J/0206771A20260206D00516.jpg",]},
+
+    ];
+
+    function renderCars() {
+      const grid = document.getElementById('carsGrid');
+      grid.innerHTML = carsData.map(car => `
+        <div onclick="openCarTab(${car.id})" class="car-card bg-zinc-800 rounded-3xl overflow-hidden cursor-pointer group">
+          <img src="${car.mainImg}" class="w-full h-64 object-cover transition-transform group-hover:scale-110" alt="${car.title}">
+          <div class="p-8">
+            <h3 class="text-2xl font-bold">${car.title}</h3>
+            <div class="mt-8 flex justify-between items-end">
+              <span class="text-3xl font-bold">${car.price}</span>
+              <span class="px-5 py-1.5 text-xs bg-zinc-700 rounded-full">${car.type}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openCarTab(id) {
+      const car = carsData[id];
+      let galleryHTML = '';
+      car.gallery.forEach((img, index) => {
+        galleryHTML += `
+          <img onclick="changeMainImage('${img}')" 
+               src="${img}" 
+               class="gallery-img w-full aspect-video object-cover rounded-2xl cursor-pointer ring-1 ring-zinc-700 hover:ring-red-600 transition-all">
+        `;
+      });
+
+      const html = `
+        <div class="grid lg:grid-cols-2 gap-16">
+          <!-- Image Section -->
+          <div>
+            <div class="rounded-3xl overflow-hidden shadow-2xl">
+              <img id="mainImage" src="${car.mainImg}" class="w-full" alt="${car.title}">
+            </div>
+            <div class="mt-8 grid grid-cols-4 gap-4">
+              ${galleryHTML}
+            </div>
+          </div>
+
+          <!-- Details -->
+          <div class="space-y-12">
+            <div>
+              <h1 class="text-6xl font-bold heading-font tracking-tight">${car.title}</h1>
+              <p class="text-5xl font-bold mt-10 text-red-500">${car.price}</p>
+            </div>
+
+            <p class="text-zinc-300 text-lg leading-relaxed">
+              Experience the perfect harmony of breathtaking design, raw power, and cutting-edge technology. 
+              The ${car.title} is engineered to deliver an unforgettable driving experience.
+            </p>
+
+            <button onclick="alert('Test drive request for ${car.title} has been successfully submitted. Our team will contact you shortly.')" 
+                    class="w-full py-8 bg-gradient-to-r from-red-600 to-orange-600 text-2xl font-semibold rounded-3xl hover:scale-105 transition-all shadow-2xl">
+              Book Test Drive
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('carContent').innerHTML = html;
+      document.getElementById('carTab').classList.remove('hidden');
+      document.getElementById('carTab').classList.add('flex');
+    }
+
+    function changeMainImage(src) {
+      document.getElementById('mainImage').src = src;
+    }
+
+    function closeCarTab() {
+      const tab = document.getElementById('carTab');
+      tab.classList.add('hidden');
+      tab.classList.remove('flex');
+    }
+
+    function setActive(el) {
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function submitForm() {
+      alert("Thank you! Your inquiry has been received. Our team will contact you within 24 hours.");
+      document.getElementById('contactForm').reset();
+    }
+
+    // Initialize
+    renderCars();
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape") closeCarTab();
+    });
+  </script>
+</body>
+</html>
